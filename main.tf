@@ -4,14 +4,24 @@ resource "tfe_project" "this" {
 }
 
 resource "tfe_team" "this" {
-  name = var.team_name
+  for_each = var.team_project_access
+
+  name         = each.key
+  organization = var.organization_name
+}
+
+resource "tfe_team" "custom" {
+  for_each = var.custom_team_project_access
+
+  name         = each.key
+  organization = var.organization_name
 }
 
 resource "tfe_team_project_access" "default" {
   for_each = var.team_project_access
 
   access     = each.value
-  team_id    = tfe_team.this.id
+  team_id    = tfe_team.this[each.key].id
   project_id = tfe_project.this.id
 }
 
@@ -19,7 +29,7 @@ resource "tfe_team_project_access" "custom" {
   for_each = var.custom_team_project_access
 
   access     = "custom"
-  team_id    = tfe_team.this.id
+  team_id    = tfe_team.custom[each.key].id
   project_id = tfe_project.this.id
 
   project_access {
