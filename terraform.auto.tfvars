@@ -8,5 +8,5 @@ team_project_access = {
 
 custom_team_project_access = {}
 
-varset              = null
+varset              = {}
 create_variable_set = false

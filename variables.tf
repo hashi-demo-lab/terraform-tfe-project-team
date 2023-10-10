@@ -44,13 +44,17 @@ variable "create_variable_set" {
 
 variable "varset" {
   type = object({
-    create_variable_set      = optional(bool, true)
     variables                = optional(map(any), {})
-    variable_set_name        = string
+    variable_set_name        = optional(string)
     variable_set_description = optional(string, "")
     tags                     = optional(list(string), [])
     global                   = optional(bool, false)
   })
+    
+validation {
+    condition     = try(var.varset.variable_set_name != null, true) ? try(var.varset.variable_set_name != "", true) : true
+    error_message = "variable_set_name cannot be an empty string if provided."
+  }
 }
 
 

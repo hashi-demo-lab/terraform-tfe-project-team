@@ -5,7 +5,7 @@ resource "tfe_project" "this" {
 
 resource "tfe_project_variable_set" "project" {
   count           = var.create_variable_set ? 1 : 0
-  variable_set_id = module.terraform-tfe-variable-sets[0].variable_set.id
+  variable_set_id = module.terraform-tfe-variable-sets[0].variable_set[0].id
   project_id      = tfe_project.this.id
 }
 
@@ -14,7 +14,7 @@ module "terraform-tfe-variable-sets" {
   count  = var.create_variable_set ? 1 : 0
 
   organization             = var.organization_name
-  create_variable_set      = try(var.create_variable_set, false)
+  create_variable_set      = try(var.create_variable_set, true)
   variables                = try(var.varset.variables, {})
   variable_set_name        = try(var.varset.variable_set_name, "")
   variable_set_description = try(var.varset.variable_set_description, "")
