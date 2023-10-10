@@ -7,9 +7,6 @@ variable "project_name" {
 variable "organization_name" {
   type = string
 }
-variable "team_name" {
-  type = string
-}
 
 variable "team_project_access" {
   type        = map(string)
