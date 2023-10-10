@@ -3,6 +3,26 @@ resource "tfe_project" "this" {
   organization = var.organization_name
 }
 
+resource "tfe_project_variable_set" "project" {
+  count           = var.create_variable_set ? 1 : 0
+  variable_set_id = module.terraform-tfe-variable-sets[0].variable_set.id
+  project_id      = tfe_project.this.id
+}
+
+module "terraform-tfe-variable-sets" {
+  source = "github.com/hashi-demo-lab/terraform-tfe-variable-sets"
+  count  = var.create_variable_set ? 1 : 0
+
+  organization             = var.organization_name
+  create_variable_set      = try(var.create_variable_set, false)
+  variables                = try(var.varset.variables, {})
+  variable_set_name        = try(var.varset.variable_set_name, "")
+  variable_set_description = try(var.varset.variable_set_description, "")
+  tags                     = try(var.varset.tags, [])
+  global                   = try(var.varset.global, false)
+}
+
+
 resource "tfe_team" "this" {
   for_each = var.team_project_access
 
@@ -50,3 +70,5 @@ resource "tfe_team_project_access" "custom" {
     run_tasks = try(each.value.workspace_access.run_tasks, false)
   }
 }
+
+

@@ -36,3 +36,21 @@ variable "custom_team_project_access" {
     })
   )
 }
+
+variable "create_variable_set" {
+  type    = bool
+  default = false
+}
+
+variable "varset" {
+  type = object({
+    create_variable_set      = optional(bool, true)
+    variables                = optional(map(any), {})
+    variable_set_name        = string
+    variable_set_description = optional(string, "")
+    tags                     = optional(list(string), [])
+    global                   = optional(bool, false)
+  })
+}
+
+
