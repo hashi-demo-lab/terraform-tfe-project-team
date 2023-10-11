@@ -23,7 +23,7 @@ run "project_creation" {
   }
 
   assert {
-    condition     = tfe_project.this.organization == "test_organization"
+    condition     = tfe_project.this.organization == "hashi-demos-apj"
     error_message = "Organization name is incorrect"
   }
 }
@@ -76,7 +76,7 @@ run "team_creation" {
   }
 
   assert {
-    condition     = tfe_team.this["team1"].organization == "test_organization"
+    condition     = tfe_team.this["team1"].organization == "hashi-demos-apj"
     error_message = "Organization name is incorrect"
   }
 
@@ -86,7 +86,7 @@ run "team_creation" {
   }
 
   assert {
-    condition     = tfe_team.custom["team2"].organization == "test_organization"
+    condition     = tfe_team.custom["team2"].organization == "hashi-demos-apj"
     error_message = "Organization name is incorrect"
   }
 
