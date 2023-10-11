@@ -3,7 +3,7 @@
 
 variables {
   project_name = "test_project"
-  organization_name = "test_organization"
+  organization_name = "hashi-demos-apj"
   team_project_access = {}
   custom_team_project_access = {}
   create_variable_set = false
