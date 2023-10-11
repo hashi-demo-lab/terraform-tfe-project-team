@@ -9,6 +9,7 @@ resource "tfe_project_variable_set" "project" {
   project_id      = tfe_project.this.id
 }
 
+# TO PIN MODULE VERSION
 module "terraform-tfe-variable-sets" {
   source = "github.com/hashi-demo-lab/terraform-tfe-variable-sets"
   count  = var.create_variable_set ? 1 : 0
