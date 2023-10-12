@@ -15,7 +15,7 @@ module "terraform-tfe-variable-sets" {
   count  = var.create_variable_set ? 1 : 0
 
   organization             = var.organization_name
-  create_variable_set      = try(var.create_variable_set, true)
+  create_variable_set      = var.create_variable_set
   variables                = try(var.varset.variables, {})
   variable_set_name        = try(var.varset.variable_set_name, "")
   variable_set_description = try(var.varset.variable_set_description, "")
