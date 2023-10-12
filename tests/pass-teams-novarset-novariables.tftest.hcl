@@ -2,9 +2,14 @@ variables {
   organization_name = "hashi-demos-apj"
   project_name      = "tftest-project-testadmin"
 
-  team_project_access = {
-    "tftest-project-testadmin-team-admin" = "admin"
-  }
+team_project_access = {
+      "team1" = {
+        team = {
+          access     = "read"
+          sso_team_id = null
+        }
+      }
+    }
 
   custom_team_project_access = {}
 

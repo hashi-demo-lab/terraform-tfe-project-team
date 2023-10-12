@@ -9,9 +9,14 @@ variable "organization_name" {
 }
 
 variable "team_project_access" {
-  type        = map(string)
-  description = "Map of existing Team(s) and built-in permissions to grant on Workspace."
-  default     = {}
+  type = map(
+    object({
+      team = object({
+        access      = optional(string, "read")
+        team_sso_id = optional(string, null)
+      })
+  })
+  )
 }
 
 variable "custom_team_project_access" {
@@ -50,8 +55,8 @@ variable "varset" {
     tags                     = optional(list(string), [])
     global                   = optional(bool, false)
   })
-    
-validation {
+
+  validation {
     condition     = try(var.varset.variable_set_name != null, true) ? try(var.varset.variable_set_name != "", true) : true
     error_message = "variable_set_name cannot be an empty string if provided."
   }

@@ -3,8 +3,14 @@ variables {
   project_name      = "tftest-project-testadmin"
 
   team_project_access = {
-    "tftest-project-testadmin-team-admin" = "admin"
-  }
+      "team1" = {
+        team = {
+          access     = "read"
+          sso_team_id = null
+        }
+      }
+    }
+
 
   custom_team_project_access = {}
 
@@ -24,9 +30,9 @@ run "test" {
   # Load and count the objects created in the "execute" run block.
   command = plan
 
-   expect_failures = [
+  expect_failures = [
     var.varset,
-  ] 
+  ]
 
   assert {
     condition     = tfe_project.this.name == "tftest-project-testadmin"

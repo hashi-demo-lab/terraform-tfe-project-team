@@ -2,17 +2,17 @@
 # WARNING: Generated module tests should be considered experimental and be reviewed by the module author.
 
 variables {
-  project_name = "test_project"
-  organization_name = "hashi-demos-apj"
-  team_project_access = {}
+  project_name               = "test_project"
+  organization_name          = "hashi-demos-apj"
+  team_project_access        = {}
   custom_team_project_access = {}
-  create_variable_set = false
+  create_variable_set        = false
   varset = {
-    variables = {}
-    variable_set_name = "test_varset"
+    variables                = {}
+    variable_set_name        = "test_varset"
     variable_set_description = "Test variable set"
-    tags = []
-    global = false
+    tags                     = []
+    global                   = false
   }
 }
 
@@ -47,24 +47,29 @@ run "variable_set_creation" {
 run "team_creation" {
   variables {
     team_project_access = {
-      "team1" = "read"
+      "team1" = {
+        team = {
+          access     = "read"
+          sso_team_id = null
+        }
+      }
     }
     custom_team_project_access = {
       "team2" = {
         project_access = {
           settings = "read"
-          teams = "none"
+          teams    = "none"
         }
         workspace_access = {
-          runs = "read"
+          runs           = "read"
           sentinel_mocks = "none"
           state_versions = "none"
-          variables = "none"
-          create = false
-          locking = false
-          delete = false
-          move = false
-          run_tasks = false
+          variables      = "none"
+          create         = false
+          locking        = false
+          delete         = false
+          move           = false
+          run_tasks      = false
         }
       }
     }

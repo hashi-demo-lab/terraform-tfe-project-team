@@ -29,6 +29,7 @@ resource "tfe_team" "this" {
 
   name         = each.key
   organization = var.organization_name
+  sso_team_id  = try(each.value.team.sso_team_id, null)
 }
 
 resource "tfe_team" "custom" {
@@ -41,7 +42,7 @@ resource "tfe_team" "custom" {
 resource "tfe_team_project_access" "default" {
   for_each = var.team_project_access
 
-  access     = each.value
+  access     = each.value.team.access
   team_id    = tfe_team.this[each.key].id
   project_id = tfe_project.this.id
 }
