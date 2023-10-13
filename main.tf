@@ -37,6 +37,7 @@ resource "tfe_team" "custom" {
 
   name         = each.key
   organization = var.organization_name
+  sso_team_id  = try(each.value.team.sso_team_id, null)
 }
 
 resource "tfe_team_project_access" "default" {
@@ -50,7 +51,7 @@ resource "tfe_team_project_access" "default" {
 resource "tfe_team_project_access" "custom" {
   for_each = var.custom_team_project_access
 
-  access     = "custom"
+  access     = each.value.team.access
   team_id    = tfe_team.custom[each.key].id
   project_id = tfe_project.this.id
 

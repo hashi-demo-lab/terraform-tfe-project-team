@@ -56,6 +56,7 @@ run "team_creation" {
     }
     custom_team_project_access = {
       "team2" = {
+        team = {}
         project_access = {
           settings = "read"
           teams    = "none"

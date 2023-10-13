@@ -22,6 +22,10 @@ variable "team_project_access" {
 variable "custom_team_project_access" {
   type = map(
     object({
+      team = object({
+        access      = optional(string,"custom")
+        team_sso_id = optional(string, "null")
+      })
       project_access = object({
         settings = optional(string, "read")
         teams    = optional(string, "none")
