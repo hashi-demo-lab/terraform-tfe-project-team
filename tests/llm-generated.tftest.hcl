@@ -14,6 +14,9 @@ variables {
     tags                     = []
     global                   = false
   }
+
+  platform_project_name = "test_platform_project"
+
 }
 
 run "project_creation" {
@@ -49,7 +52,7 @@ run "team_creation" {
     team_project_access = {
       "team1" = {
         team = {
-          access     = "read"
+          access      = "read"
           sso_team_id = null
         }
       }

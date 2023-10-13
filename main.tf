@@ -1,3 +1,4 @@
+#Consumer BU Project
 resource "tfe_project" "this" {
   name         = var.project_name
   organization = var.organization_name
@@ -74,4 +75,10 @@ resource "tfe_team_project_access" "custom" {
   }
 }
 
+
+### 
+resource "tfe_project" "platform" {
+  name         = var.platform_project_name
+  organization = var.organization_name
+}
 

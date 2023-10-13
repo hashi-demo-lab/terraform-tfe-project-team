@@ -2,14 +2,14 @@ variables {
   organization_name = "hashi-demos-apj"
   project_name      = "tftest-project-testadmin"
 
-team_project_access = {
-      "team1" = {
-        team = {
-          access     = "read"
-          sso_team_id = null
-        }
+  team_project_access = {
+    "team1" = {
+      team = {
+        access      = "read"
+        sso_team_id = null
       }
     }
+  }
 
   custom_team_project_access = {}
 
@@ -17,8 +17,8 @@ team_project_access = {
     variables         = {}
     variable_set_name = "tftest-project-varset"
   }
-  create_variable_set = true
-
+  create_variable_set   = true
+  platform_project_name = "test_platform_project"
 }
 
 provider "tfe" {

@@ -15,7 +15,7 @@ variable "team_project_access" {
         access      = optional(string, "read")
         team_sso_id = optional(string, null)
       })
-  })
+    })
   )
 }
 
@@ -23,7 +23,7 @@ variable "custom_team_project_access" {
   type = map(
     object({
       team = object({
-        access      = optional(string,"custom")
+        access      = optional(string, "custom")
         team_sso_id = optional(string, "null")
       })
       project_access = object({
@@ -61,9 +61,13 @@ variable "varset" {
   })
 
   validation {
-    condition     = try(var.varset.variable_set_name != null, true) ? try(var.varset.variable_set_name != "", true) : true
+    condition     = try(var.varset.variable_set_name != null, false) ? try(var.varset.variable_set_name != "", false) : true
     error_message = "variable_set_name cannot be an empty string if provided."
   }
 }
 
 
+variable "platform_project_name" {
+  type = string
+
+}

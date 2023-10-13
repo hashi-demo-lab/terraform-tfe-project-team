@@ -3,13 +3,13 @@ variables {
   project_name      = "tftest-project-testadmin"
 
   team_project_access = {
-      "team1" = {
-        team = {
-          access     = "read"
-          sso_team_id = null
-        }
+    "team1" = {
+      team = {
+        access      = "read"
+        sso_team_id = null
       }
     }
+  }
 
 
   custom_team_project_access = {}
@@ -19,6 +19,7 @@ variables {
   }
   create_variable_set = true
 
+  platform_project_name = "test_platform_project"
 }
 
 provider "tfe" {

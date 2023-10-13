@@ -3,13 +3,13 @@ organization_name = "hashi-demos-apj"
 project_name      = "tftest-project"
 
 team_project_access = {
-      "team1-tftest" = {
-        team = {
-          access     = "read"
-          sso_team_id = null
-        }
-      }
+  "team1-tftest" = {
+    team = {
+      access      = "read"
+      sso_team_id = null
     }
+  }
+}
 
 custom_team_project_access = {}
 
