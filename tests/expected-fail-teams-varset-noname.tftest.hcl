@@ -27,7 +27,7 @@ provider "tfe" {
 }
 
 
-run "test" {
+run "input validation varset-noname" {
   # Load and count the objects created in the "execute" run block.
   command = plan
 

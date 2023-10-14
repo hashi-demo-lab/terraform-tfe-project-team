@@ -2,7 +2,7 @@
 # WARNING: Generated module tests should be considered experimental and be reviewed by the module author.
 
 variables {
-  project_name               = "test_project"
+  project_name               = "tftest_project"
   organization_name          = "hashi-demos-apj"
   team_project_access        = {}
   custom_team_project_access = {}
@@ -45,6 +45,45 @@ run "variable_set_creation" {
     condition     = tfe_project_variable_set.project[0].project_id == tfe_project.this.id
     error_message = "Project ID is incorrect"
   }
+}
+
+run "novarset-novariables" {
+  # Load and count the objects created in the "execute" run block.
+  variables {
+  organization_name = "hashi-demos-apj"
+  project_name      = "tftest-project-testadmin"
+
+  team_project_access = {
+    "team1" = {
+      team = {
+        access      = "read"
+        sso_team_id = null
+      }
+    }
+  }
+
+  custom_team_project_access = {}
+
+  varset = {
+    variables         = {}
+    variable_set_name = "tftest-project-varset"
+  }
+  create_variable_set   = true
+  platform_project_name = "test_platform_project"
+}  
+
+  command = apply
+
+  assert {
+    condition     = tfe_project.this.name == "tftest-project-testadmin"
+    error_message = "Project names matched - tftest-project-testadmin"
+  }
+
+  assert {
+    condition     = module.terraform-tfe-variable-sets[0].variable_set[0].name == "tftest-project-varset"
+    error_message = "varset name matched - tftest-project-varset"
+  }
+
 }
 
 run "team_creation" {
