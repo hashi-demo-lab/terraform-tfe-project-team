@@ -21,7 +21,7 @@ variables {
 
 run "project_creation" {
   assert {
-    condition     = tfe_project.this.name == "test_project"
+    condition     = tfe_project.this.name == "tftest_project"
     error_message = "Project name is incorrect"
   }
 
