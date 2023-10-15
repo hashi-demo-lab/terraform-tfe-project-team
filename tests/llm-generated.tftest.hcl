@@ -98,7 +98,10 @@ run "team_creation" {
     }
     custom_team_project_access = {
       "team2" = {
-        team = {}
+        team = {
+          access      = "custom"
+          sso_team_id = null
+        }
         project_access = {
           settings = "read"
           teams    = "none"

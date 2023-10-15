@@ -1,0 +1,18 @@
+tenant: "bu1"
+control-project:
+  bu1-control-project:
+    project_name: bu1-control-project
+    team_project_access:
+      bu1-control-admins:
+        team:
+          access: "admin"
+          sso_team_id: null
+    control-ws:
+      bu1-control-ws:
+        create_github_repo: true
+        github_repo_id: "some id"
+consumer_rbac:
+consumer-projects:
+  bu1-project1":
+  bu1-project2:
+  bu1-project3:
