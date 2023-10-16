@@ -19,17 +19,36 @@ variables {
   }
   create_variable_set = true
 
-  bu-control_project_name = "test-bu1-project"
-  bu-control_workspace = "test-bu1-workspace"
+  bu_control_project_name = "test-bu1-project"
+  bu_control_workspace = "test-bu1-workspace"
+  bu_control_admins_id = ""
 }
 
 provider "tfe" {
   organization = "hashi-demos-apj"
 }
 
+run "setup_bu_control" {
+  
+  variables {
+    organization_name = "hashi-demos-apj"
+    bu_control_project_name = "test_platform_project"
+    bu_control_workspace = "test-bu1-workspace"
+  }
+
+  command = apply
+  module {
+    source = "./tests/setup"
+  }
+
+}
 
 run "input validation varset-noname" {
   # Load and count the objects created in the "execute" run block.
+  variables {
+    bu_control_admins_id = run.setup_bu_control.bu_control_team_id
+    
+  }
   command = plan
 
   expect_failures = [

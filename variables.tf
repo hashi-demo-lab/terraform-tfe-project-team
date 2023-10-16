@@ -66,13 +66,9 @@ variable "varset" {
   }
 }
 
-
-variable "bu-control_project_name" {
+variable "bu_control_admins_id" {
   type = string
-}
-
-variable "bu-control_workspace" {
-  type = string
+  description = "team id for bu control team sued for project access"
 }
 
 

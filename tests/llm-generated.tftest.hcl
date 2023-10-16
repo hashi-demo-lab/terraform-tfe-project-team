@@ -15,11 +15,28 @@ variables {
     global                   = false
   }
 
-  bu-control_project_name = "test_platform_project"
-  bu-control_workspace = "test-bu1-workspace"
+}
+
+run "setup_bu_control" {
+  
+  variables {
+    organization_name = "hashi-demos-apj"
+    bu_control_project_name = "test_platform_project"
+    bu_control_workspace = "test-bu1-workspace"
+  }
+
+  command = apply
+  module {
+    source = "./tests/setup"
+  }
+
 }
 
 run "project_creation" {
+  variables {
+    bu_control_admins_id = run.setup_bu_control.bu_control_team_id
+  }
+
   assert {
     condition     = tfe_project.this.name == "tftest_project"
     error_message = "Project name is incorrect"
@@ -34,6 +51,7 @@ run "project_creation" {
 run "variable_set_creation" {
   variables {
     create_variable_set = true
+    bu_control_admins_id = run.setup_bu_control.bu_control_team_id
   }
 
   assert {
@@ -69,7 +87,7 @@ run "novarset-novariables" {
     variable_set_name = "tftest-project-varset"
   }
   create_variable_set   = true
-  bu-control_project_name = "test_platform_project"
+  bu_control_admins_id = run.setup_bu_control.bu_control_team_id
 }  
 
   command = apply
@@ -88,6 +106,7 @@ run "novarset-novariables" {
 
 run "team_creation" {
   variables {
+    bu_control_admins_id = run.setup_bu_control.bu_control_team_id
     team_project_access = {
       "team1" = {
         team = {
