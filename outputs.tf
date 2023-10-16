@@ -1,6 +1,14 @@
-## Place your outputs here for your module
+output "project" {
+  value = tfe_project.this
+  description = "tfe project"
+}
 
-/* output "output-example" {
-  value       = vault_policy.policies
-  description = "Sample helm values file that contains all of the configured paths that were created with this module. This should be used a reference and not a raw input to another object"
-} */
+output "team" {
+  value = tfe_team.this
+  description = "tfe teams pre-defined rbac"
+}
+
+output "team_custom" {
+  value = tfe_team.custom
+  description = "tfe teams custom rbac"
+}

@@ -10,9 +10,8 @@ resource "tfe_project_variable_set" "project" {
   project_id      = tfe_project.this.id
 }
 
-# TO PIN MODULE VERSION
 module "terraform-tfe-variable-sets" {
-  source = "github.com/hashi-demo-lab/terraform-tfe-variable-sets"
+  source = "github.com/hashi-demo-lab/terraform-tfe-variable-sets?ref=v0.4.1"
   count  = var.create_variable_set ? 1 : 0
 
   organization             = var.organization_name
@@ -23,7 +22,6 @@ module "terraform-tfe-variable-sets" {
   tags                     = try(var.varset.tags, [])
   global                   = try(var.varset.global, false)
 }
-
 
 resource "tfe_team" "this" {
   for_each = var.team_project_access
@@ -75,16 +73,12 @@ resource "tfe_team_project_access" "custom" {
   }
 }
 
-
-
-####
-
+# bu-control team project access
 resource "tfe_team_project_access" "bu-control" {
   access     = "admin" # to add var for this
   team_id    = var.bu_control_admins_id
   project_id = tfe_project.this.id
 }
-
 
 resource "tfe_team_token" "bu-control-admins" {
   team_id = var.bu_control_admins_id
