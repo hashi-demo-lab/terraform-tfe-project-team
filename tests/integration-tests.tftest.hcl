@@ -1,6 +1,3 @@
-
-# WARNING: Generated module tests should be considered experimental and be reviewed by the module author.
-
 variables {
   project_name               = "tftest_project"
   organization_name          = "hashi-demos-apj"
