@@ -15,3 +15,4 @@ custom_team_project_access = {}
 
 varset              = {}
 create_variable_set = false
+bu-control_workspace = "test-bu1-workspace"

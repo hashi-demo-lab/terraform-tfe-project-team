@@ -1,0 +1,37 @@
+tenant: "bu1"
+bu-control-project:
+  bu1-control-project:
+    project_name: bu1-control-project
+    team_project_access:
+      bu1-control-admins:
+        create_team: true
+        team:
+          access: "admin"
+          sso_team_id: null
+    control-ws:
+      bu1-control-ws:
+        create_github_repo: true
+        github_repo_id: "some id"
+        github_repo_template: "some repo"
+bu-consumer-projects:
+  control_team_project_access:
+    bu1-control-admins:
+      create_team: false
+      team_id: "some id"
+  default_team_project_access:
+    ${project_name}-maintainer: 
+      team:
+        access: maintain
+        sso_team_id: null
+    ${project_name}-write:
+        access: write
+        sso_team_id: null
+    ${project_name}-read:
+      team:
+        access: "read"
+        sso_team_id: null
+  default_team_project_access_custom:  
+  projects: #likely project config should be separate folder and file per project
+    bu1-project1:
+    bu1-project2:
+    bu1-project3:

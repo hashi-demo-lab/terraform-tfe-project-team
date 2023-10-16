@@ -19,7 +19,8 @@ variables {
   }
   create_variable_set = true
 
-  platform_project_name = "test_platform_project"
+  bu-control_project_name = "test-bu1-project"
+  bu-control_workspace = "test-bu1-workspace"
 }
 
 provider "tfe" {

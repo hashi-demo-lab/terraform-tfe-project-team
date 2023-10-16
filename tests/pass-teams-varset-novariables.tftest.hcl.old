@@ -18,7 +18,7 @@ variables {
     variable_set_name = "tftest-project-varset"
   }
   create_variable_set   = true
-  platform_project_name = "test_platform_project"
+  bu-control_project_name = "test_platform_project"
 }
 
 provider "tfe" {

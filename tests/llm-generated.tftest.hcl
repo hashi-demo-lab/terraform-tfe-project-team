@@ -15,8 +15,8 @@ variables {
     global                   = false
   }
 
-  platform_project_name = "test_platform_project"
-
+  bu-control_project_name = "test_platform_project"
+  bu-control_workspace = "test-bu1-workspace"
 }
 
 run "project_creation" {
@@ -69,7 +69,7 @@ run "novarset-novariables" {
     variable_set_name = "tftest-project-varset"
   }
   create_variable_set   = true
-  platform_project_name = "test_platform_project"
+  bu-control_project_name = "test_platform_project"
 }  
 
   command = apply

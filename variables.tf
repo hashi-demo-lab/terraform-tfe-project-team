@@ -67,7 +67,12 @@ variable "varset" {
 }
 
 
-variable "platform_project_name" {
+variable "bu-control_project_name" {
   type = string
-
 }
+
+variable "bu-control_workspace" {
+  type = string
+}
+
+

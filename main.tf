@@ -76,9 +76,19 @@ resource "tfe_team_project_access" "custom" {
 }
 
 
-### 
-resource "tfe_project" "platform" {
-  name         = var.platform_project_name
+# bu-control(x)
+resource "tfe_project" "bu-control" {
+  name         = var.bu-control_project_name
   organization = var.organization_name
 }
 
+# Control Workspace will be API driven
+resource "tfe_workspace" "bu-control" {
+  name = var.bu-control_workspace
+  organization = var.organization_name
+  project_id = tfe_project.bu-control.id
+  allow_destroy_plan = false
+}
+
+
+ 
