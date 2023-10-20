@@ -1,8 +1,6 @@
 name: 'Terraform'
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
   workflow_dispatch:
 
@@ -10,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
+  terraform-test:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
