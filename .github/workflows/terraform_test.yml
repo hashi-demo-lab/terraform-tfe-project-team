@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Terraform_Test'
 
 on:
   pull_request:
