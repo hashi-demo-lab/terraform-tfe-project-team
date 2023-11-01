@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraform-test:
-    name: 'Terraform'
+    name: 'Terraform_Test'
     runs-on: ubuntu-latest
     environment: production
 
