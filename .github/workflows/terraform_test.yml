@@ -33,6 +33,6 @@ jobs:
     - name: Terraform Init
       run: terraform init
     - name: Terraform Test
-      run: terraform test
+      run: terraform test -cloud-run=${{ var.MODULE_SOURCE }}
       env:
         TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
