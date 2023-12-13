@@ -1,6 +1,6 @@
 # Place your variable overrides or values in this file if you aren't using TFC's variable store for some reason
 organization_name = "hashi-demos-apj"
-project_name      = "tftest-project"
+project_name      = "tftest2-project"
 
 team_project_access = {
   "team1-tftest" = {
