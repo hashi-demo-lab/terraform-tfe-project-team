@@ -23,6 +23,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    # terraform-docs
+    - name: Render terraform docs inside the README.md and push changes back to PR branch
+      uses: terraform-docs/gh-actions@v1.0.0
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: inject
+        git-push: "true"
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3.0.0
