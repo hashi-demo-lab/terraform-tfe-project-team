@@ -62,7 +62,7 @@ run "variable_set_creation" {
   }
 }
 
-run "novarset-novariables" {
+run "novarset_novariables" {
   # Load and count the objects created in the "execute" run block.
   variables {
   organization_name = "hashi-demos-apj"
