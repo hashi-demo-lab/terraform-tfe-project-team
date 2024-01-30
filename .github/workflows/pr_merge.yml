@@ -18,7 +18,7 @@ jobs:
       with:
         issue-number: ${{ github.event.pull_request.number }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        body-regex: '^.*SemVerType=.*$'
+        body-regex: '^.*SemVerType.*$'
 
     - name: Process Comments
       run: |
