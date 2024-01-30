@@ -5,7 +5,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pull-requests: write
 
 jobs:
   terraform-test:
@@ -49,11 +50,20 @@ jobs:
       env:
         TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
     ## REQUIRED: Workflow permissions: `Read and write permissions`
+
+    - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
     - name: PR Comment
       uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           // 1. Retrieve existing bot comments for the PR
           const { data: comments } = await github.rest.issues.listComments({
