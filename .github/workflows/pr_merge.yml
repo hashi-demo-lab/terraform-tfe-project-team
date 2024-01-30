@@ -1,0 +1,31 @@
+name: PR Merge Pipeline
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Fetch PR Comments
+      id: fetch-comments
+      uses: peter-evans/find-comment@v1
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        body-includes: "pipeline trigger" # Adjust this to match a specific pattern in comments
+
+    - name: Process Comments
+      run: |
+        COMMENTS="${{ steps.fetch-comments.outputs.comment }}"
+        # Add your logic here to process comments and extract necessary information
+
+    - name: Run Pipeline
+      run: |
+        # Use extracted information from comments to run your pipeline
+        echo "Running pipeline with extracted information"
