@@ -4,7 +4,7 @@ repos:
   - id: terraform-test
     name: Run Terraform unit tests
     language: system
-    entry: terraform test -filter=tests/unit-tests.tftest.hcl -v
+    entry: terraform test -filter=tests/unit-tests.tftest.hcl
     pass_filenames: false
     always_run: true
     verbose: true
