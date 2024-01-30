@@ -26,10 +26,10 @@ jobs:
         ref: ${{ github.event.pull_request.head.ref }}
         
     - uses: mheap/github-action-required-labels@v5
-        with:
-          mode: exactly
-          count: 1
-          labels: "semver:patch, semver:minor, semver:major"
+      with:
+        mode: exactly
+        count: 1
+        labels: "semver:patch, semver:minor, semver:major"
           
     # terraform-docs
     - name: Render terraform docs inside the README.md and push changes back to PR branch
