@@ -8,8 +8,8 @@ permissions: write-all
 
 
 jobs:
-  terraform-test:
-    name: 'Terraform_Test'
+  terraform-docs:
+    name: 'Terraform_Docs'
     runs-on: ubuntu-latest
     environment: production
 
