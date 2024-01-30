@@ -44,6 +44,44 @@ jobs:
     - name: Terraform Init
       run: terraform init
     - name: Terraform Test
+      id: test-output
       run: terraform test -cloud-run=${{ vars.MODULE_SOURCE }}
       env:
         TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
+    ## REQUIRED: Workflow permissions: `Read and write permissions`
+    - name: PR Comment
+      uses: actions/github-script@v6
+      if: github.event_name == 'pull_request'
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          // 1. Retrieve existing bot comments for the PR
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          })
+          const botComment = comments.find(comment => {
+            return comment.user.type === 'Bot' && comment.body.includes('Terraform Test Output')
+          })
+          const output = `#### Terraform Test Output
+              \`\`\`\n
+              ${{ steps.test-output.outputs.stdout }}
+              \`\`\`
+              `
+          // 3. If we have a comment, update it, otherwise create a new one
+          if (botComment) {
+            github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: output
+            })
+          } else {
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+          }
