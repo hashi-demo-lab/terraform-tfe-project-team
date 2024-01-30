@@ -10,7 +10,7 @@ jobs:
     if: github.event.pull_request.merged == true
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Fetch PR Comments
       id: fetch-comments
@@ -22,7 +22,10 @@ jobs:
 
     - name: Process Comments
       run: |
-        COMMENTS="${{ steps.fetch-comments.outputs.comment }}"
+        echo ${{ steps.fc.outputs.comment-id }}
+        echo ${{ steps.fc.outputs.comment-body }}
+        echo ${{ steps.fc.outputs.comment-author }}
+        echo ${{ steps.fc.outputs.comment-created-at }}
         # Add your logic here to process comments and extract necessary information
 
     - name: Run Pipeline
