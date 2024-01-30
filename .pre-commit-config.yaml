@@ -7,3 +7,4 @@ repos:
     entry: terraform test -filter=tests/unit-tests.tftest.hcl -v
     pass_filenames: false
     always_run: true
+    verbose: true
