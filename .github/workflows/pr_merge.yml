@@ -5,7 +5,7 @@ on:
     types: [closed]
 
 jobs:
-  run-pipeline:
+  Module-Version-Release:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
