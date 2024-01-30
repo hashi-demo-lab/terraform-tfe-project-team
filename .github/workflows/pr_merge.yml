@@ -12,23 +12,17 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Fetch PR Comments
-      id: fetch-comments
-      uses: peter-evans/find-comment@v3
-      with:
-        issue-number: ${{ github.event.pull_request.number }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        body-regex: '^.*SemVerType.*$'
-
-    - name: Process Comments
-      run: |
-        echo ${{ steps.fetch-comments.outputs.comment-id }}
-        echo ${{ steps.fetch-comments.outputs.comment-body }}
-        echo ${{ steps.fetch-comments.outputs.comment-author }}
-        echo ${{ steps.fetch-comments.outputs.comment-created-at }}
-        # Add your logic here to process comments and extract necessary information
-
-    - name: Run Pipeline
-      run: |
-        # Use extracted information from comments to run your pipeline
-        echo "Running pipeline with extracted information"
+    - name: get-labels
+      uses: snnaplab/get-labels-action@v1
+      
+    - if: contains(fromJSON(env.LABELS), 'semver:major')
+      run: | 
+       echo "major release"
+       
+    - if: contains(fromJSON(env.LABELS), 'semver:minor')
+      run: | 
+       echo "minor release"
+       
+    - if: contains(fromJSON(env.LABELS), 'semver:patch')
+      run: | 
+       echo "patch release"
