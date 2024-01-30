@@ -22,10 +22,10 @@ jobs:
 
     - name: Process Comments
       run: |
-        echo ${{ steps.fc.outputs.comment-id }}
-        echo ${{ steps.fc.outputs.comment-body }}
-        echo ${{ steps.fc.outputs.comment-author }}
-        echo ${{ steps.fc.outputs.comment-created-at }}
+        echo ${{ steps.fetch-comments.outputs.comment-id }}
+        echo ${{ steps.fetch-comments.outputs.comment-body }}
+        echo ${{ steps.fetch-comments.outputs.comment-author }}
+        echo ${{ steps.fetch-comments.outputs.comment-created-at }}
         # Add your logic here to process comments and extract necessary information
 
     - name: Run Pipeline
