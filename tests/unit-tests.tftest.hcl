@@ -61,3 +61,24 @@ run "input_validation_varset_noname" {
   }
 
 }
+
+
+run "test2" {
+ # Load and count the objects created in the "execute" run block.
+  variables {
+    bu_control_admins_id = run.setup_bu_control.bu_control_team_id
+    
+  }
+
+  command = plan
+
+  expect_failures = [
+    var.varset,
+  ]
+
+  assert {
+    condition     = tfe_project.this.name == "tftest-project-testadmin"
+    error_message = "Project names matched - tftest-project-testadmin"
+  }
+
+}
