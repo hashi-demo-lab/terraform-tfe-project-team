@@ -18,7 +18,7 @@ jobs:
       with:
         issue-number: ${{ github.event.pull_request.number }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        body-includes: "pipeline trigger" # Adjust this to match a specific pattern in comments
+        body-includes: "SemVerType=" # Adjust this to match a specific pattern in comments
 
     - name: Process Comments
       run: |
