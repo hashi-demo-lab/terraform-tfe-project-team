@@ -67,6 +67,7 @@ jobs:
         TFE_TOKEN: ${{ secrets.TFE_TOKEN }}
 
     - name: publish-module-version
+      if: ${{ steps.new-version.outputs.python_output }}
       id: publish-module
       run: |
         PYTHON_OUT="$(python ./.github/workflows/publish_module_version.py)"
@@ -78,6 +79,6 @@ jobs:
         TFE_PROVIDER: 'tfe'
         TFE_TOKEN: ${{ secrets.TFE_TOKEN }}
         COMMIT_SHA: ${{ github.sha }}
-        NEW_VERSION: ${{ steps.new-version-outputs.outputs.python_output }}
+        NEW_VERSION: ${{ steps.new-version.outputs.python_output }}
 
         
