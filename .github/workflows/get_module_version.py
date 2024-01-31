@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from packaging import version
 
 def get_latest_version(tfe_hostname, org_name, module_name, provider_name, token):
@@ -61,6 +62,9 @@ else:
 
         try:
             new_version = increment_version(latest_version, release_type)
-            print(f"Incremented version: {new_version}")
+            if new_version:
+                json_text = json.dumps(new_version)
+                print(json_text)
+                #print(f"{new_version}")
         except ValueError as e:
             print(f"Error: {e}")
