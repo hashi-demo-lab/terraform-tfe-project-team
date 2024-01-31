@@ -1,4 +1,4 @@
-name: 'Module_Publishing'
+name: 'Module_Validate'
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ permissions: write-all
 
 jobs:
   terraform-docs:
-    name: 'Terraform_Docs'
+    name: 'Validte_Module'
     runs-on: ubuntu-latest
     environment: production
 
