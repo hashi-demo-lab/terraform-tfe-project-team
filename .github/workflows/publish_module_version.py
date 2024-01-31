@@ -35,6 +35,7 @@ new_version = os.getenv('NEW_VERSION')
 if not all([tfe_hostname, org_name, module_name, provider_name, token, commit_sha]):
     print("Error: One or more required environment variables are not set.")
 else:
-    create_new_module_version(tfe_hostname, org_name, module_name, provider_name, token, new_version, commit_sha)
-except ValueError as e:
+    try:
+        create_new_module_version(tfe_hostname, org_name, module_name, provider_name, token, new_version, commit_sha)
+    except ValueError as e:
     print(f"Error: {e}")
