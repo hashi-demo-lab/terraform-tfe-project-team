@@ -63,8 +63,6 @@ else:
         try:
             new_version = increment_version(latest_version, release_type)
             if new_version:
-                json_text = json.dumps(new_version)
-                print(json_text)
-                #print(f"{new_version}")
+                print(new_version)
         except ValueError as e:
             print(f"Error: {e}")

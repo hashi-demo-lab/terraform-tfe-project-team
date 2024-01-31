@@ -7,6 +7,3 @@
 ### BugFixes:
 *
 *
-
-### SemVerType=<MAJOR,MINOR,PATCH>
-
