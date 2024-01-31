@@ -28,14 +28,14 @@ def get_latest_version(tfe_hostname, org_name, module_name, provider_name, token
 def increment_version(latest_version, release_type):
     major, minor, patch = map(int, latest_version.split('.'))
 
-    if release_type == "major":
+    if release_type.lower().strip() == "major":
         major += 1
         minor = 0
         patch = 0
-    elif release_type == "minor":
+    elif release_type.lower().strip() == "minor":
         minor += 1
         patch = 0
-    elif release_type == "patch":
+    elif release_type.lower().strip() == "patch":
         patch += 1
     else:
         raise ValueError("Invalid release type")
@@ -49,6 +49,7 @@ org_name = os.getenv('TFE_ORG')
 module_name = os.getenv('TFE_MODULE')
 provider_name = os.getenv('TFE_PROVIDER')
 token = os.getenv('TFE_TOKEN')
+release_type = os.getenv('RELEASE_TYPE')
 
 # Ensure all required environment variables are set
 if not all([tfe_hostname, org_name, module_name, provider_name, token]):
@@ -58,7 +59,6 @@ else:
     if latest_version:
         print(f"Latest version: {latest_version}")
 
-        release_type = input("Enter release type (major, minor, patch): ").lower().strip()
         try:
             new_version = increment_version(latest_version, release_type)
             print(f"Incremented version: {new_version}")

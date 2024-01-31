@@ -18,11 +18,35 @@ jobs:
     - if: contains(fromJSON(env.LABELS), 'semver:major')
       run: | 
        echo "major release"
+       echo "release=major" >> $GITHUB_OUTPUT
        
     - if: contains(fromJSON(env.LABELS), 'semver:minor')
       run: | 
        echo "minor release"
+       echo "release=minor" >> $GITHUB_OUTPUT
        
     - if: contains(fromJSON(env.LABELS), 'semver:patch')
       run: | 
        echo "patch release"
+       echo "release=patch" >> $GITHUB_OUTPUT
+
+    - name: Setup Python
+      uses: actions/setup-python@v4.6.0
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: install-python-dep
+      run: pip install -r ./.github/workflows/requirements.txt
+
+    - name: get-module-version
+      id: get-version-outputs
+      run: |
+        PYTHON_OUT=$(python ./.github/workflows/get_module_version.py)
+        echo "python_output=$PYTHON_OUT" >> $GITHUB_OUTPUT
+      env:
+        TFE_HOSTNAME: 'app.terraform.io'
+        TFE_ORG: 'hashi-demos-apj'
+        TFE_MODULE: 'project-team'
+        TFE_PROVIDER: 'tfe'
+        
