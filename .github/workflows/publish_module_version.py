@@ -38,4 +38,4 @@ else:
     try:
         create_new_module_version(tfe_hostname, org_name, module_name, provider_name, token, new_version, commit_sha)
     except ValueError as e:
-    print(f"Error: {e}")
+        print(f"Error: {e}")
