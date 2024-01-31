@@ -58,7 +58,7 @@ if not all([tfe_hostname, org_name, module_name, provider_name, token]):
 else:
     latest_version = get_latest_version(tfe_hostname, org_name, module_name, provider_name, token)
     if latest_version:
-        print(f"Latest version: {latest_version}")
+        #print(f"Latest version: {latest_version}")
 
         try:
             new_version = increment_version(latest_version, release_type)
