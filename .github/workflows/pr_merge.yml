@@ -56,8 +56,8 @@ jobs:
     - name: get-module-version
       id: get-version-outputs
       run: |
-        PYTHON_OUT=$(python ./.github/workflows/get_module_version.py)
-        echo "python_output=$PYTHON_OUT" >> $GITHUB_OUTPUT
+        PYTHON_OUT="$(python ./.github/workflows/get_module_version.py)"
+        echo "python_output=$PYTHON_OUT"
       env:
         TFE_HOSTNAME: 'app.terraform.io'
         TFE_ORG: 'hashi-demos-apj'
