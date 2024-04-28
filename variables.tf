@@ -68,7 +68,7 @@ variable "varset" {
 
 variable "bu_control_admins_id" {
   type = string
-  description = "team id for bu control team sued for project access"
+  description = "team id for bu control team used for project access"
 }
 
 
