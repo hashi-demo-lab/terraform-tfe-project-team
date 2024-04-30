@@ -44,7 +44,7 @@ resource "tfe_team_project_access" "default" {
   for_each = var.team_project_access
 
   access     = each.value.team.access
-  team_id    = tfe_team.this["${var.business_unit}${each.key}"].id
+  team_id    = tfe_team.this[each.key].id
   project_id = tfe_project.consumer.id
 }
 
@@ -52,7 +52,7 @@ resource "tfe_team_project_access" "custom" {
   for_each = var.custom_team_project_access
 
   access     = each.value.team.access
-  team_id    = tfe_team.custom["${var.business_unit}${each.key}"].id
+  team_id    = tfe_team.custom[each.key].id
   project_id = tfe_project.consumer.id
 
   project_access {
