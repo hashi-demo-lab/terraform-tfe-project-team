@@ -8,6 +8,11 @@ variable "organization_name" {
   type = string
 }
 
+variable "business_unit" {
+  type = string
+  default = null
+}
+
 variable "team_project_access" {
   type = map(
     object({
