@@ -59,6 +59,7 @@ variable "varset" {
     tags                     = optional(list(string), [])
     global                   = optional(bool, false)
   })
+  default = {}
 
   validation {
     condition     = try(var.varset.variable_set_name != null, false) ? try(var.varset.variable_set_name != "", false) : true
