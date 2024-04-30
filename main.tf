@@ -4,9 +4,6 @@ resource "tfe_project" "consumer" {
   organization = var.organization_name
 }
 
-variable "business_unit" {
-  type = string
-}
 
 resource "tfe_project_variable_set" "project" {
   count           = var.create_variable_set ? 1 : 0
