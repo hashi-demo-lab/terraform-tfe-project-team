@@ -1,4 +1,8 @@
 #Consumer BU Project
+locals {
+  
+}
+
 resource "tfe_project" "consumer" {
   name         = var.project_name
   organization = var.organization_name
@@ -27,7 +31,7 @@ module "terraform-tfe-variable-sets" {
 resource "tfe_team" "this" {
   for_each = var.team_project_access
 
-  name         = "${var.business_unit}${each.key}"
+  name         = "${var.business_unit}_${each.key}"
   organization = var.organization_name
   sso_team_id  = try(each.value.team.sso_team_id, null)
 }
@@ -35,7 +39,7 @@ resource "tfe_team" "this" {
 resource "tfe_team" "custom" {
   for_each = var.custom_team_project_access
 
-  name         = "${var.business_unit}${each.key}"
+  name         = "${var.business_unit}_${each.key}"
   organization = var.organization_name
   sso_team_id  = try(each.value.team.sso_team_id, null)
 }
