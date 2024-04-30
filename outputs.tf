@@ -1,5 +1,5 @@
 output "project" {
-  value = tfe_project.this
+  value = tfe_project.consumer.id
   description = "tfe project"
 }
 

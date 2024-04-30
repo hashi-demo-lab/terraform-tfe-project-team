@@ -1,5 +1,5 @@
 #Consumer BU Project
-resource "tfe_project" "this" {
+resource "tfe_project" "consumer" {
   name         = var.project_name
   organization = var.organization_name
 }
@@ -7,7 +7,7 @@ resource "tfe_project" "this" {
 resource "tfe_project_variable_set" "project" {
   count           = var.create_variable_set ? 1 : 0
   variable_set_id = module.terraform-tfe-variable-sets[0].variable_set[0].id
-  project_id      = tfe_project.this.id
+  project_id      = tfe_project.consumer.id
 }
 
 module "terraform-tfe-variable-sets" {
@@ -44,7 +44,7 @@ resource "tfe_team_project_access" "default" {
 
   access     = each.value.team.access
   team_id    = tfe_team.this[each.key].id
-  project_id = tfe_project.this.id
+  project_id = tfe_project.consumer.id
 }
 
 resource "tfe_team_project_access" "custom" {
@@ -52,7 +52,7 @@ resource "tfe_team_project_access" "custom" {
 
   access     = each.value.team.access
   team_id    = tfe_team.custom[each.key].id
-  project_id = tfe_project.this.id
+  project_id = tfe_project.consumer.id
 
   project_access {
     settings = try(each.value.project_access.settings, "read")
@@ -77,10 +77,7 @@ resource "tfe_team_project_access" "custom" {
 resource "tfe_team_project_access" "bu-control" {
   access     = "admin" # to add var for this
   team_id    = var.bu_control_admins_id
-  project_id = tfe_project.this.id
+  project_id = tfe_project.consumer.id
 }
 
-resource "tfe_team_token" "bu-control-admins" {
-  team_id = var.bu_control_admins_id
-}
  

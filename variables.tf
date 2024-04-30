@@ -44,6 +44,7 @@ variable "custom_team_project_access" {
       })
     })
   )
+  default = {}
 }
 
 variable "create_variable_set" {
@@ -69,7 +70,7 @@ variable "varset" {
 
 variable "bu_control_admins_id" {
   type = string
-  description = "team id for bu control team used for project access"
+  description = "team id for bu control team used for admin project access"
 }
 
 
