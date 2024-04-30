@@ -10,7 +10,7 @@ variable "organization_name" {
 
 variable "business_unit" {
   type = string
-  default = null
+  default = ""
 }
 
 variable "team_project_access" {
