@@ -1,5 +1,10 @@
-output "project" {
+output "project_id" {
   value = tfe_project.consumer.id
+  description = "tfe project"
+}
+
+output "project_name" {
+  value = tfe_project.consumer.name
   description = "tfe project"
 }
 
