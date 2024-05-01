@@ -8,6 +8,17 @@ output "project_name" {
   description = "tfe project"
 }
 
+
+output "project_map" {
+  value = tomap({"$tfe_project.consumer.name}" = tfe_project.consumer.id})
+  description = "tfe project map"
+}
+
+output "bu" {
+  value = var.business_unit
+  description = "tfe project"
+}
+
 output "team" {
   value = tfe_team.this
   description = "tfe teams pre-defined rbac"
