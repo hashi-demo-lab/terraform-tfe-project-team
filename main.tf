@@ -79,9 +79,9 @@ resource "tfe_team_project_access" "custom" {
 }
 
 
-# bu-control team project admin access
+# bu-control team project  access
 resource "tfe_team_project_access" "bu-control" {
-  access     = "admin" # to add var for this
+  access     = var.bu_control_admins_access # to add var for this
   team_id    = var.bu_control_admins_id
   project_id = tfe_project.consumer.id
 }

@@ -78,4 +78,9 @@ variable "bu_control_admins_id" {
   description = "team id for bu control team used for admin project access"
 }
 
+variable "bu_control_admins_access" {
+  type = string
+  default = "maintain"
+}
+
 
