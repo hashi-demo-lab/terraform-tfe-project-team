@@ -83,4 +83,8 @@ variable "bu_control_admins_access" {
   default = "maintain"
 }
 
+variable "enable_oidc" {
+  type = string
+  default = false
+}
 

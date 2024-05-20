@@ -28,3 +28,8 @@ output "team_custom" {
   value = tfe_team.custom
   description = "tfe teams custom rbac"
 }
+
+output "enable_oidc" {
+  value = var.enable_oidc
+  description = "enable oidc"
+}
