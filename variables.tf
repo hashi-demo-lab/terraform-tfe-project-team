@@ -4,6 +4,11 @@ variable "project_name" {
   type = string
 }
 
+variable "project_description" {
+  type = string
+  default = null
+}
+
 variable "organization_name" {
   type = string
 }

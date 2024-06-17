@@ -6,6 +6,7 @@ locals {
 resource "tfe_project" "consumer" {
   name         = var.project_name
   organization = var.organization_name
+  description  = var.project_description
 }
 
 
