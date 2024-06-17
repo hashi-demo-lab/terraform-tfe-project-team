@@ -79,7 +79,6 @@ resource "tfe_team_project_access" "custom" {
   }
 }
 
-
 # bu-control team project  access
 resource "tfe_team_project_access" "bu-control" {
   access     = var.bu_control_admins_access # to add var for this

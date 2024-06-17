@@ -10,7 +10,7 @@ output "project_name" {
 
 
 output "project_map" {
-  value = tomap({"$tfe_project.consumer.name}" = {"project_id"=tfe_project.consumer.id,"bu"=var.business_unit} })
+  value = tomap({"${tfe_project.consumer.name}" = {"project_id"=tfe_project.consumer.id,"bu"=var.business_unit} })
   description = "tfe project map"
 }
 
