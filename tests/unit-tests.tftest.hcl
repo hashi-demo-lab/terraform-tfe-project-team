@@ -56,7 +56,7 @@ run "input_validation_varset_noname" {
   ]
 
   assert {
-    condition     = tfe_project.this.name == "tftest-project-testadmin"
+    condition     = tfe_project.consumer.name == "tftest-project-testadmin"
     error_message = "Project names matched - tftest-project-testadmin"
   }
 
@@ -77,7 +77,7 @@ run "test_feature12" {
   ]
 
   assert {
-    condition     = tfe_project.this.name == "tftest-project-testadmin"
+    condition     = tfe_project.consumer.name == "tftest-project-testadmin"
     error_message = "Project names matched - tftest-project-testadmin"
   }
 
