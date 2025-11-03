@@ -14,7 +14,7 @@ variable "organization_name" {
 }
 
 variable "business_unit" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -79,17 +79,17 @@ variable "varset" {
 }
 
 variable "bu_control_admins_id" {
-  type = string
+  type        = string
   description = "team id for bu control team used for admin project access"
 }
 
 variable "bu_control_admins_access" {
-  type = string
+  type    = string
   default = "maintain"
 }
 
 variable "enable_oidc" {
-  type = string
+  type    = string
   default = false
 }
 

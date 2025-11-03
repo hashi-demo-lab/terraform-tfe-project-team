@@ -1,6 +1,6 @@
 #Consumer BU Project
 locals {
-  
+
 }
 
 resource "tfe_project" "consumer" {
@@ -85,5 +85,3 @@ resource "tfe_team_project_access" "bu-control" {
   team_id    = var.bu_control_admins_id
   project_id = tfe_project.consumer.id
 }
- 
-
