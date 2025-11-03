@@ -35,12 +35,12 @@ run "project_creation" {
   }
 
   assert {
-    condition     = tfe_project.this.name == "tftest_project"
+    condition     = tfe_project.consumer.name == "tftest_project"
     error_message = "Project name is incorrect"
   }
 
   assert {
-    condition     = tfe_project.this.organization == "hashi-demos-apj"
+    condition     = tfe_project.consumer.organization == "hashi-demos-apj"
     error_message = "Organization name is incorrect"
   }
 }
@@ -57,7 +57,7 @@ run "variable_set_creation" {
   }
 
   assert {
-    condition     = tfe_project_variable_set.project[0].project_id == tfe_project.this.id
+    condition     = tfe_project_variable_set.project[0].project_id == tfe_project.consumer.id
     error_message = "Project ID is incorrect"
   }
 }
@@ -90,7 +90,7 @@ run "novarset_novariables" {
   command = apply
 
   assert {
-    condition     = tfe_project.this.name == "tftest-project-testadmin"
+    condition     = tfe_project.consumer.name == "tftest-project-testadmin"
     error_message = "Project names matched - tftest-project-testadmin"
   }
 
@@ -168,7 +168,7 @@ run "team_creation" {
   }
 
   assert {
-    condition     = tfe_team_project_access.default["team1"].project_id == tfe_project.this.id
+    condition     = tfe_team_project_access.default["team1"].project_id == tfe_project.consumer.id
     error_message = "Project ID is incorrect"
   }
 
@@ -183,7 +183,7 @@ run "team_creation" {
   }
 
   assert {
-    condition     = tfe_team_project_access.custom["team2"].project_id == tfe_project.this.id
+    condition     = tfe_team_project_access.custom["team2"].project_id == tfe_project.consumer.id
     error_message = "Project ID is incorrect"
   }
 }
