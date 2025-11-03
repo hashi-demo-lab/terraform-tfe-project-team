@@ -104,6 +104,7 @@ run "novarset_novariables" {
 run "team_creation" {
   variables {
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
+    business_unit        = ""  # Empty string means no prefix
     team_project_access = {
       "team1" = {
         team = {
@@ -138,7 +139,7 @@ run "team_creation" {
   }
 
   assert {
-    condition     = tfe_team.this["team1"].name == "team1"
+    condition     = tfe_team.this["team1"].name == "_team1"
     error_message = "Team name is incorrect"
   }
 
@@ -148,7 +149,7 @@ run "team_creation" {
   }
 
   assert {
-    condition     = tfe_team.custom["team2"].name == "team2"
+    condition     = tfe_team.custom["team2"].name == "_team2"
     error_message = "Custom team name is incorrect"
   }
 
