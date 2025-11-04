@@ -34,6 +34,8 @@ run "project_creation" {
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
   }
 
+  command = apply
+
   assert {
     condition     = tfe_project.consumer.name == "tftest_project"
     error_message = "Project name is incorrect"
@@ -51,6 +53,8 @@ run "variable_set_creation" {
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
   }
 
+  command = apply
+  
   assert {
     condition     = tfe_project_variable_set.project[0].variable_set_id == module.terraform-tfe-variable-sets[0].variable_set[0].id
     error_message = "Variable set ID is incorrect"
@@ -67,7 +71,7 @@ run "novarset_novariables" {
   variables {
   organization_name = "hashi-demos-apj"
   project_name      = "tftest-project-testadmin"
-
+    
   team_project_access = {
     "team1" = {
       team = {
@@ -137,6 +141,8 @@ run "team_creation" {
       }
     }
   }
+
+  command = apply
 
   assert {
     condition     = tfe_team.this["team1"].name == "_team1"
