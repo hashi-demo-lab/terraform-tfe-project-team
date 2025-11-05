@@ -1,5 +1,7 @@
 name: 'Module Validate'
 
+run-name: 'Validate: ${{ github.event.pull_request.title || github.ref_name }}'
+
 on:
   pull_request:
     paths:
@@ -43,8 +45,12 @@ jobs:
 
     - name: Terraform Format Check
       id: fmt
-      run: terraform fmt -check -recursive
-      continue-on-error: true
+      run: |
+        if ! terraform fmt -check -recursive; then
+          echo "❌ Terraform files are not formatted correctly"
+          echo "Run 'terraform fmt -recursive' locally to fix"
+          exit 1
+        fi
 
     - name: Terraform Init
       id: init
@@ -79,6 +85,16 @@ jobs:
       id: test
       run: terraform test -filter=tests/unit-tests.tftest.hcl
       continue-on-error: true
+      env:
+        TFE_TOKEN: ${{ secrets.TFE_TOKEN }}
+        TFE_HOSTNAME: "app.terraform.io"
+        # Add other provider credentials as needed:
+        # ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        # ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        # ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Update Terraform Docs
       uses: terraform-docs/gh-actions@v1.2.0

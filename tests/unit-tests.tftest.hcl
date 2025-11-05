@@ -1,7 +1,7 @@
 variables {
   organization_name = "hashi-demos-apj"
   project_name      = "tftest-project-testadmin"
-  
+
   team_project_access = {
     "team1" = {
       team = {
@@ -10,18 +10,18 @@ variables {
       }
     }
   }
-  
+
   custom_team_project_access = {}
-  
+
   # Default to invalid config for negative test
   varset = {
     variable_set_name = ""
   }
   create_variable_set = true
-  
+
   bu_control_project_name = "test-bu1-project"
-  bu_control_workspace = "test-bu1-workspace"
-  bu_control_admins_id = ""
+  bu_control_workspace    = "test-bu1-workspace"
+  bu_control_admins_id    = ""
 }
 
 provider "tfe" {
@@ -47,7 +47,7 @@ run "input_validation_varset_noname" {
   variables {
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
   }
-  
+
   command = plan
 
   expect_failures = [
@@ -64,7 +64,7 @@ run "input_validation_varset_noname" {
 run "test_valid_project_with_varset" {
   variables {
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
-    
+
     varset = {
       variable_set_name        = "test-varset-valid"
       variable_set_description = "Test variable set"
@@ -78,7 +78,7 @@ run "test_valid_project_with_varset" {
     condition     = tfe_project.consumer.name == "tftest-project-testadmin"
     error_message = "Project name doesn't match expected value"
   }
-  
+
   assert {
     condition     = length(module.terraform-tfe-variable-sets) == 1
     error_message = "Variable set module should be created when create_variable_set is true"
@@ -89,9 +89,9 @@ run "test_valid_project_with_varset" {
 run "test_valid_project_without_varset" {
   variables {
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
-    
+
     create_variable_set = false
-    varset             = {}
+    varset              = {}
   }
 
   command = plan
@@ -100,7 +100,7 @@ run "test_valid_project_without_varset" {
     condition     = tfe_project.consumer.name == "tftest-project-testadmin"
     error_message = "Project name doesn't match expected value"
   }
-  
+
   assert {
     condition     = length(module.terraform-tfe-variable-sets) == 0
     error_message = "Variable set module should NOT be created when create_variable_set is false"

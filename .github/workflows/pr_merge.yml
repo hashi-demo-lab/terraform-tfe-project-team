@@ -1,5 +1,7 @@
 name: 'Module Release'
 
+run-name: 'Release: ${{ github.event.pull_request.title }}'
+
 on:
   pull_request:
     types: [closed]
