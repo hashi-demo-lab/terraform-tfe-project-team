@@ -33,3 +33,8 @@ output "enable_oidc" {
   value       = var.enable_oidc
   description = "enable oidc"
 }
+
+output "name" {
+  value       = tfe_project.consumer.name
+  description = "tfe project name"
+}
