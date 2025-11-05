@@ -6,9 +6,9 @@ resource "tfe_project" "bu-control" {
 
 # Control Workspace will be API driven
 resource "tfe_workspace" "bu-control" {
-  name = var.bu_control_workspace
-  organization = var.organization_name
-  project_id = tfe_project.bu-control.id
+  name               = var.bu_control_workspace
+  organization       = var.organization_name
+  project_id         = tfe_project.bu-control.id
   allow_destroy_plan = false
 }
 

@@ -7,4 +7,5 @@ variable "bu_control_workspace" {
 }
 
 variable "organization_name" {
+  type = string
 }

@@ -1,35 +1,35 @@
 output "project_id" {
   value       = tfe_project.consumer.id
-  description = "tfe project"
+  description = "The ID of the TFE project"
 }
 
 output "project_name" {
   value       = tfe_project.consumer.name
-  description = "tfe project"
+  description = "The name of the TFE project"
 }
 
 
 output "project_map" {
-  value       = tomap({ "${tfe_project.consumer.name}" = { "project_id" = tfe_project.consumer.id, "bu" = var.business_unit } })
-  description = "tfe project map"
+  value       = tomap({ (tfe_project.consumer.name) = { "project_id" = tfe_project.consumer.id, "bu" = var.business_unit } })
+  description = "Map of project name to project details"
 }
 
 output "bu" {
   value       = var.business_unit
-  description = "tfe project"
+  description = "The business unit associated with this project"
 }
 
 output "team" {
   value       = tfe_team.this
-  description = "tfe teams pre-defined rbac"
+  description = "TFE teams with pre-defined RBAC roles"
 }
 
 output "team_custom" {
   value       = tfe_team.custom
-  description = "tfe teams custom rbac"
+  description = "TFE teams with custom RBAC roles"
 }
 
 output "enable_oidc" {
   value       = var.enable_oidc
-  description = "enable oidc"
+  description = "Whether OIDC is enabled for this project"
 }

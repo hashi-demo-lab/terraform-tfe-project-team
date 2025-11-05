@@ -15,11 +15,11 @@ variables {
 }
 
 run "setup_bu_control" {
-  
+
   variables {
-    organization_name = "hashi-demos-apj"
+    organization_name       = "hashi-demos-apj"
     bu_control_project_name = "test2_platform_project"
-    bu_control_workspace = "test2-bu1-workspace"
+    bu_control_workspace    = "test2-bu1-workspace"
   }
 
   command = apply
@@ -49,12 +49,12 @@ run "project_creation" {
 
 run "variable_set_creation" {
   variables {
-    create_variable_set = true
+    create_variable_set  = true
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
   }
 
   command = apply
-  
+
   assert {
     condition     = tfe_project_variable_set.project[0].variable_set_id == module.terraform-tfe-variable-sets[0].variable_set[0].id
     error_message = "Variable set ID is incorrect"
@@ -69,27 +69,27 @@ run "variable_set_creation" {
 run "novarset_novariables" {
   # Load and count the objects created in the "execute" run block.
   variables {
-  organization_name = "hashi-demos-apj"
-  project_name      = "tftest-project-testadmin"
-    
-  team_project_access = {
-    "team1" = {
-      team = {
-        access      = "read"
-        sso_team_id = null
+    organization_name = "hashi-demos-apj"
+    project_name      = "tftest-project-testadmin"
+
+    team_project_access = {
+      "team1" = {
+        team = {
+          access      = "read"
+          sso_team_id = null
+        }
       }
     }
-  }
 
-  custom_team_project_access = {}
+    custom_team_project_access = {}
 
-  varset = {
-    variables         = {}
-    variable_set_name = "tftest-project-varset"
+    varset = {
+      variables         = {}
+      variable_set_name = "tftest-project-varset"
+    }
+    create_variable_set  = true
+    bu_control_admins_id = run.setup_bu_control.bu_control_team_id
   }
-  create_variable_set   = true
-  bu_control_admins_id = run.setup_bu_control.bu_control_team_id
-}  
 
   command = apply
 
@@ -108,7 +108,7 @@ run "novarset_novariables" {
 run "team_creation" {
   variables {
     bu_control_admins_id = run.setup_bu_control.bu_control_team_id
-    business_unit        = ""  # Empty string means no prefix
+    business_unit        = "" # Empty string means no prefix
     team_project_access = {
       "team1" = {
         team = {
