@@ -48,7 +48,9 @@ def get_latest_version(
         response.raise_for_status()
         
         data = response.json()
-        versions = data.get("versions", [])        if not versions:
+        versions = data.get("versions", [])
+        
+        if not versions:
             # First release - start at 0.1.0
             print("0.1.0")
             sys.exit(0)
