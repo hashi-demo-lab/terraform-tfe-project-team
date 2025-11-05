@@ -33,13 +33,3 @@ output "enable_oidc" {
   value       = var.enable_oidc
   description = "Whether OIDC is enabled for this project"
 }
-
-output "details" {
-  value = {
-    project_id    = tfe_project.consumer.id
-    project_name  = tfe_project.consumer.name
-    business_unit = var.business_unit
-    enable_oidc   = var.enable_oidc
-  }
-  description = "Summary of all project details in a single output"
-}
