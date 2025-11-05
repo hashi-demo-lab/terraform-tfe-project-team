@@ -104,6 +104,7 @@
 | Name | Description |
 |------|-------------|
 | <a name="output_bu"></a> [bu](#output\_bu) | The business unit associated with this project |
+| <a name="output_details"></a> [details](#output\_details) | Comprehensive details of the TFE project and its configurations |
 | <a name="output_enable_oidc"></a> [enable\_oidc](#output\_enable\_oidc) | Whether OIDC is enabled for this project |
 | <a name="output_project_id"></a> [project\_id](#output\_project\_id) | The ID of the TFE project |
 | <a name="output_project_map"></a> [project\_map](#output\_project\_map) | Map of project name to project details |
