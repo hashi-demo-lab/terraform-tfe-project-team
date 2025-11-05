@@ -1,12 +1,22 @@
 name: 'Module Release'
 
-run-name: 'Release: ${{ github.event.pull_request.title }}'
+run-name: 'Release: ${{ github.event.pull_request.title || github.event.inputs.version }}'
 
 on:
   pull_request:
     types: [closed]
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release type (patch, minor, or major)'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 permissions:
   contents: read
@@ -15,7 +25,7 @@ jobs:
   publish-module:
     name: 'Publish Module to Registry'
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
 
     steps:
     - name: Checkout Repository
@@ -24,19 +34,28 @@ jobs:
         fetch-depth: 0
 
     - name: Get PR Labels
+      if: github.event_name == 'pull_request'
       id: pr-labels
       uses: snnaplab/get-labels-action@v1
 
     - name: Determine Release Type
       id: release-type
       run: |
-        LABELS='${{ env.LABELS }}'
+        if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          # Manual trigger - use input
+          RELEASE_TYPE="${{ github.event.inputs.version }}"
+          echo "RELEASE_TYPE=$RELEASE_TYPE" >> $GITHUB_ENV
+          echo "release=$RELEASE_TYPE" >> $GITHUB_OUTPUT
+          echo "🎯 Manual release: $RELEASE_TYPE"
+        else
+          # PR merge - use labels
+          LABELS='${{ env.LABELS }}'
 
-        if echo "$LABELS" | grep -q '"semver:major"'; then
-          echo "RELEASE_TYPE=major" >> $GITHUB_ENV
-          echo "release=major" >> $GITHUB_OUTPUT
-          echo "📦 Detected MAJOR release (breaking changes)"
-        elif echo "$LABELS" | grep -q '"semver:minor"'; then
+          if echo "$LABELS" | grep -q '"semver:major"'; then
+            echo "RELEASE_TYPE=major" >> $GITHUB_ENV
+            echo "release=major" >> $GITHUB_OUTPUT
+            echo "📦 Detected MAJOR release (breaking changes)"
+          elif echo "$LABELS" | grep -q '"semver:minor"'; then
           echo "RELEASE_TYPE=minor" >> $GITHUB_ENV
           echo "release=minor" >> $GITHUB_OUTPUT
           echo "✨ Detected MINOR release (new features)"
