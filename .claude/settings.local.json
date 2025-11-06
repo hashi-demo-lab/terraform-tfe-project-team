@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(terraform-test)",
+      "Bash(git mv:*)",
+      "Bash(terraform test:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
